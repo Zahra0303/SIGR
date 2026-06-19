@@ -109,11 +109,15 @@ DEFAULT_FROM_EMAIL = f"SIGR-CA <{os.environ.get('EMAIL_USER', 'lafin2626@gmail.c
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SAMESITE = 'Lax'
+RAILWAY_PUBLIC_DOMAIN = os.environ.get('RAILWAY_PUBLIC_DOMAIN', '')
+
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
-    os.environ.get('RAILWAY_URL', 'https://sigr-ca-system2-production.up.railway.app'),
 ]
+
+if RAILWAY_PUBLIC_DOMAIN:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{RAILWAY_PUBLIC_DOMAIN}')
 
 CACHES = {
     'default': {
